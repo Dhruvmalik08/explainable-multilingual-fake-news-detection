@@ -27,8 +27,8 @@ Raw text ──► MuRIL (google/muril-base-cased) ──► 768-dim embedding �
 Raw image ─► ResNet-50 (ImageNet pretrained) ──► 2048-dim embedding ─┘
 ```
 
-* `text\\\\\\\\\\\\\\\_branch`: 768 → 512 → 256 (ReLU, Dropout)
-* `image\\\\\\\\\\\\\\\_branch`: 2048 → 512 → 256 (ReLU, Dropout)
+* `text_branch`: 768 → 512 → 256 (ReLU, Dropout)
+* `image_branch`: 2048 → 512 → 256 (ReLU, Dropout)
 * `classifier`: 512 (concat) → 256 → 2
 
 Per-mode decision thresholds (tuned on validation data, not a flat 0.5 cutoff):
@@ -44,7 +44,7 @@ Per-mode decision thresholds (tuned on validation data, not a flat 0.5 cutoff):
 ```
 .
 ├── app.py                     # Streamlit inference app
-├── training\\\\\\\\\\\\\\\_pipeline.ipynb    # Feature extraction, training, calibration, SHAP, evidence retrieval
+├── training_pipeline.ipynb    # Feature extraction, training, calibration, SHAP, evidence retrieval
 ├── requirements.txt           # Dependencies to run app.py
 ├── requirements-training.txt  # Additional dependencies to run the notebook
 ├── .env.example                # Template for required API key
@@ -59,7 +59,7 @@ coverage was added by machine-translating the English text (same images and
 labels) rather than sourcing a separate Hindi corpus — so Hindi results should be
 read as exploratory rather than fully validated.
 
-Raw data is not included in this repo. See `training\\\\\\\\\\\\\\\_pipeline.ipynb` for the
+Raw data is not included in this repo. See `training_pipeline.ipynb` for the
 expected directory layout under `data/`.
 
 ## Model weights
@@ -82,9 +82,9 @@ checkpoints from <https://drive.google.com/drive/folders/1QxRgZHs2xSXtjYoXdKpn-7
 ```bash
 git clone <this-repo-url>
 cd <repo-name>
-python -m venv venv \\\\\\\\\\\\\\\&\\\\\\\\\\\\\\\& source venv/bin/activate   # optional but recommended
+python -m venv venv && source venv/bin/activate   # optional but recommended
 pip install -r requirements.txt
-cp .env.example .env   # then fill in FACT\\\\\\\\\\\\\\\_CHECK\\\\\\\\\\\\\\\_API\\\\\\\\\\\\\\\_KEY
+cp .env.example .env   # then fill in FACT_CHECK_API\_KEY
 ```
 
 Get a Fact Check API key from the
@@ -97,18 +97,18 @@ Get a Fact Check API key from the
 streamlit run app.py
 ```
 
-The app loads `models/v2\\\\\\\\\\\\\\\_unified\\\\\\\\\\\\\\\_model\\\\\\\\\\\\\\\_best.pt` and
-`models/v2\\\\\\\\\\\\\\\_normalization\\\\\\\\\\\\\\\_stats.pt` on first run (cached after that), then lets
+The app loads `models/v2_unified_model_best.pt` and
+`models/v2_normalization_stats.pt` on first run (cached after that), then lets
 you paste article text, upload an image, or both, and returns a prediction with
 SHAP word attributions and Fact Check evidence.
 
 ## Reproducing training
 
-Open `training\\\\\\\\\\\\\\\_pipeline.ipynb`. It expects:
+Open `training_pipeline.ipynb`. It expects:
 
 * MuRIL and ResNet-50 features pre-extracted and saved to `data/features/`
 * A Google Drive-mounted layout (the notebook was developed in Colab) — adjust
-`PROJECT\\\\\\\\\\\\\\\_ROOT` at the top if running elsewhere
+`PROJECT_ROOT` at the top if running elsewhere
 * A Fact Check API key pasted into the designated cell (not committed)
 
 Install the extra training dependencies first:
