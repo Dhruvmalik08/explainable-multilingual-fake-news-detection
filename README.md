@@ -89,26 +89,26 @@ reproduce training/calibration without re-running feature extraction:
 2. Download the test CSVs from <https://drive.google.com/drive/folders/1LDRBeftmUTZ95lKEeGEaX5H1U4pTGfQY?usp=sharing>.
 
 3. Place them in a local `data/` directory matching this layout:
+```
 data/
 ├── features/
-│ ├── train_muril_features.pt
-│ ├── train_muril_labels.pt
-│ ├── train_image_features.pt
-│ ├── validation_muril_features.pt
-│ ├── validation_muril_labels.pt
-│ ├── validation_image_features.pt
-│ ├── test_muril_features.pt
-│ ├── test_muril_labels.pt
-│ └── test_image_features.pt
+│   ├── train_muril_features.pt
+│   ├── train_muril_labels.pt
+│   ├── train_image_features.pt
+│   ├── validation_muril_features.pt
+│   ├── validation_muril_labels.pt
+│   ├── validation_image_features.pt
+│   ├── test_muril_features.pt
+│   ├── test_muril_labels.pt
+│   └── test_image_features.pt
 └── multimodal/
-├── test_multimodal.csv
-└── subset/
-└── test_subset.csv
-
-
+    ├── test_multimodal.csv
+    └── subset/
+        └── test_subset.csv
+```
 4. Update `PROJECT_ROOT` / `DATA_ROOT` near the top of the notebook if your
    local folder structure doesn't match the original Colab/Drive layout.
-
+   
 ## Setup
 
 ```bash
